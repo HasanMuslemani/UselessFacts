@@ -1,1 +1,1 @@
-"# UselessFacts" 
+# UselessFacts
