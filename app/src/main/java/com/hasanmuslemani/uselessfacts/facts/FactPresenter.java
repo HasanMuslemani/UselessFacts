@@ -1,5 +1,6 @@
 package com.hasanmuslemani.uselessfacts.facts;
 
+import android.os.Handler;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -62,6 +63,11 @@ public class FactPresenter implements FactContract.Presenter {
                 view.hideLoading();
             }
         });
-        NetworkRequest.getInstance(MyApp.getContext()).getRequestQueue().add(jsonObjectRequest);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                NetworkRequest.getInstance(MyApp.getContext()).getRequestQueue().add(jsonObjectRequest);
+            }
+        }, 300);
     }
 }

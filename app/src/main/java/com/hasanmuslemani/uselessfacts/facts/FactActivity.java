@@ -24,6 +24,8 @@ public class FactActivity extends AppCompatActivity implements FactContract.View
     ProgressBar progressBar;
     ConstraintLayout mainLayout;
 
+    boolean isLoading = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +35,7 @@ public class FactActivity extends AppCompatActivity implements FactContract.View
 
         initViews();
 
-        presenter.loadFact();
+        loadFact();
 
         setUpMainLayoutOnClick();
     }
@@ -48,20 +50,28 @@ public class FactActivity extends AppCompatActivity implements FactContract.View
         mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.loadFact();
+                loadFact();
             }
         });
+    }
+
+    void loadFact() {
+        if(!isLoading) {
+            presenter.loadFact();
+        }
     }
 
     @Override
     public void showLoading() {
         textView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
+        isLoading = true;
     }
 
     @Override
     public void hideLoading() {
         progressBar.setVisibility(View.GONE);
+        isLoading = false;
     }
 
     @Override
